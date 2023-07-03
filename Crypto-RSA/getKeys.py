@@ -2,9 +2,9 @@ import random
 
 def getKeys():
 
-    primeList = open('./txt_files/primeList.txt').readlines()
-    private = open('./txt_files/private.txt', 'w')
-    public = open('./txt_files/public.txt', 'w')
+    primeList = open('./files/primeList.txt').readlines()
+    private = open('./files/private.txt', 'w')
+    public = open('./files/public.txt', 'w')
     
     choices = random.choices(primeList, k=2)
     p = int(choices[0])
