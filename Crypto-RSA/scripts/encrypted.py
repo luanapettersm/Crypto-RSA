@@ -1,37 +1,26 @@
 import base64
 import text_chunk
 
-print('Necessário inserir o caminho completo para os arquivos.')
-# keyFile = input('Arquivo com chave para criptografar: ')
-# source = input('Arquivo criptografado: ')
-# output = input('Arquivo para preencher com o conteúdo criptografado: ')
-
-keyFile = open('./files/private.txt')
+keys = open('./files/private.txt').readlines()
 source = open('./files/primeList.txt')
 output = open('./files/output.txt', 'w')
-
-keys = keyFile.read()
-
-mod = int(keys[0])
-key = int(keys[1])
 
 resultText = source.read()
 
 print('String para criptografar: '+resultText)
 
-chunkSize = text_chunk.block_size(mod)
+chunkSize = text_chunk.block_size(len(resultText))
 print('Defined a ' + str(chunkSize) +' chunkSize')
 
 chunks = [resultText[i:i+chunkSize] for i in range(0, len(resultText), chunkSize)]
 print(chunks)
 
-result = ''
+originalChunk = ''
 
 for chunk in chunks:
     
-    originalChunk = text_chunk.TextChunk(chunk).int_value()
+    originalChunk += str(text_chunk.TextChunk(chunk).int_value())
+    originalChunk += ','
 
-    result += pow(originalChunk, key, mod)   
-
-encoded = base64.b64encode(bytes(resultText.encode())).decode()
+encoded = base64.b64encode(bytes(originalChunk.encode())).decode()
 output.write(str(encoded))
