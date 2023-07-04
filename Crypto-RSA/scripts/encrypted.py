@@ -6,18 +6,15 @@ print('Necessário inserir o caminho completo para os arquivos.')
 # source = input('Arquivo criptografado: ')
 # output = input('Arquivo para preencher com o conteúdo criptografado: ')
 
-# Abrir arquivos
 keyFile = open('./files/private.txt')
 source = open('./files/primeList.txt')
 output = open('./files/output.txt', 'w')
 
-# Lido o keyFiles
 keys = keyFile.read()
 
 mod = int(keys[0])
 key = int(keys[1])
 
-# Lido o source
 resultText = source.read()
 
 print('String para criptografar: '+resultText)
